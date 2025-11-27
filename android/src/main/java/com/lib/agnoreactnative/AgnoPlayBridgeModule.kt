@@ -21,13 +21,13 @@ class AgnoPlayBridgeModule(reactContext: ReactApplicationContext) : ReactContext
     @SuppressLint("SourceLockedOrientationActivity")
     @ReactMethod
     fun lockToPortrait() {
-        currentActivity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        reactApplicationContext.currentActivity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
     @ReactMethod
     fun lockToLandscape() {
-        currentActivity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        reactApplicationContext.currentActivity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
     }
 
     @NonNull
@@ -37,7 +37,7 @@ class AgnoPlayBridgeModule(reactContext: ReactApplicationContext) : ReactContext
 
     @ReactMethod
     fun enterPipMode() {
-        val activity = currentActivity
+        val activity = reactApplicationContext.currentActivity
         if (activity != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val pipBuilder = PictureInPictureParams.Builder()
             val aspectRatio = Rational(9, 16)
