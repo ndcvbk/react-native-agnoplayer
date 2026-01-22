@@ -11,7 +11,8 @@
     "!/android/build",
     "/ios",
     "/lib",
-    "/*.podspec"
+    "/*.podspec",
+    "index.d.ts"
   ],
   "author": "Hardik Mashru <harrymash2006@gmail.com>",
   "contributors": [
