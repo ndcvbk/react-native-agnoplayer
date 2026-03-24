@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, UIManager, findNodeHandle, requireNativeComponent } from 'react-native';
+import { Platform, findNodeHandle } from 'react-native';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 import AgnoPlay from './AgnoPlayerNativeModule';
-const AgnoPlayerView = requireNativeComponent('RCTAgnoPlay');
+import AgnoPlayerView, { Commands } from './RCTAgnoPlayNativeComponent';
 
 const AgnoPlayerViewModule = forwardRef(({ sessionKey, brand, videoId, url, showAds, playerConfig, onFullScreen, onLoad, onPlayerStateChanged, style, onPipModeChanged }, ref) => {
   const viewRef = useRef(null);
@@ -77,15 +77,10 @@ const AgnoPlayerViewModule = forwardRef(({ sessionKey, brand, videoId, url, show
     play: () => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.play.toString(),
-            null
-          );
+          Commands.play(viewRef.current);
         } else {
           AgnoPlay.nativeModule.play(findNodeHandle(viewRef.current))
         }
-        
       }
     },
     enterPipMode: () => {
@@ -94,99 +89,64 @@ const AgnoPlayerViewModule = forwardRef(({ sessionKey, brand, videoId, url, show
     changePipMode: (pipMode) => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.changePipMode.toString(),
-            [pipMode]
-          );
+          Commands.changePipMode(viewRef.current, pipMode);
         } else {
           AgnoPlay.nativeModule.changePipMode(pipMode, findNodeHandle(viewRef.current))
         }
-        
       }
     },
     pause: () => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.pause.toString(),
-            null
-          );
+          Commands.pause(viewRef.current);
         } else {
           AgnoPlay.nativeModule.pause(findNodeHandle(viewRef.current))
         }
-        
       }
     },
     lockToPortrait: () => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.lockToPortrait.toString(),
-            null
-          );
+          Commands.lockToPortrait(viewRef.current);
         } else {
           AgnoPlay.nativeModule.lockToPortrait(findNodeHandle(viewRef.current))
         }
-        
       }
     },
     lockToLandscape: () => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.lockToLandscape.toString(),
-            null
-          );
+          Commands.lockToLandscape(viewRef.current);
         } else {
           AgnoPlay.nativeModule.lockToLandscape(findNodeHandle(viewRef.current))
         }
-        
       }
     },
     closeFullScreenPlayer: () => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.closeFullScreenPlayer.toString(),
-            null
-          );
+          Commands.closeFullScreenPlayer(viewRef.current);
         } else {
           AgnoPlay.nativeModule.closeFullScreenPlayer(findNodeHandle(viewRef.current))
         }
-        
       }
     },
     seekTo: (position) => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.seekTo.toString(),
-            [position]
-          );
+          Commands.seekTo(viewRef.current, position);
         } else {
           AgnoPlay.nativeModule.seekTo(position, findNodeHandle(viewRef.current))
         }
-        
       }
     },
     shouldMuteAudio: (value) => {
       if (viewRef.current) {
         if (Platform.OS === 'android') {
-          UIManager.dispatchViewManagerCommand(
-            findNodeHandle(viewRef.current),
-            UIManager.getViewManagerConfig('RCTAgnoPlay').Commands.shouldMuteAudio.toString(),
-            [value]
-          );
+          Commands.shouldMuteAudio(viewRef.current, value);
         } else {
           AgnoPlay.nativeModule.shouldMuteAudio(value, findNodeHandle(viewRef.current))
         }
-        
       }
     }
   }));

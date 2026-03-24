@@ -161,32 +161,32 @@ public class ReactAgnoPlayViewManager extends ViewGroupManager<ReactAgnoPlayView
     @Override
     public void receiveCommand(ReactAgnoPlayView root, String commandId, @Nullable ReadableArray args) {
         super.receiveCommand(root, commandId, args);
-        switch (Integer.parseInt(commandId)) {
-            case COMMAND_PLAY_ID:
+        switch (commandId) {
+            case COMMAND_PLAY_NAME:
                 root.play();
                 break;
-            case COMMAND_PAUSE_ID:
+            case COMMAND_PAUSE_NAME:
                 root.onHostPause();
                 break;
-            case COMMAND_SEEK_ID:
+            case COMMAND_SEEK_NAME:
                 assert args != null;
                 root.seekTo(args.getInt(0));
                 break;
-            case COMMAND_CHANGEPIP_ID:
+            case COMMAND_CHANGEPIP_NAME:
                 assert args != null;
                 root.updatePipMode(args.getBoolean(0));
                 break;
-            case COMMAND_SETVOLUME_NAME_ID:
+            case COMMAND_SETVOLUME_NAME:
                 assert args != null;
                 root.shouldMuteAudio(args.getBoolean(0));
                 break;
-            case COMMAND_PORTRAIT_ID:
+            case COMMAND_PORTRAIT_NAME:
                 root.lockToPortrait();
                 break;
-            case COMMAND_LANDSCAPE_ID:
+            case COMMAND_LANDSCAPE_NAME:
                 root.lockToLandscape();
                 break;
-            case COMMAND_CLOSEFULLSCREEN_ID:
+            case COMMAND_CLOSEFULLSCREEN_NAME:
                 root.closeFullScreenPlayer();
                 break;
         }

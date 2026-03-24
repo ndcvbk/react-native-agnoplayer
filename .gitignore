@@ -4,3 +4,4 @@ android/.idea
 android/build/
 node_modules/
 ios/RCTAgnoPlay.xcodeproj/xcshareddata/xcschemes/RCTAgnoPlay.xcscheme
+.DS_Store
